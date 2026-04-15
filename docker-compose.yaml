@@ -1,0 +1,66 @@
+services:
+  # LiteLLM Proxy - OpenAI-compatible API gateway for multiple LLM providers
+  litellm:
+    image: ghcr.io/berriai/litellm:main-latest
+    container_name: litellm-proxy
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./litellm-config.yaml:/app/config.yaml
+    env_file:
+      - .env
+    networks:
+      - agent-network
+    command: ["--config", "/app/config.yaml"]
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  # PostgreSQL Database - Stores LiteLLM logs and configuration
+  db:
+    image: postgres:16-alpine
+    container_name: agent-postgres-db
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-admin}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-changeme}
+      - POSTGRES_DB=${POSTGRES_DB:-litellm}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    networks:
+      - agent-network
+
+  # Agent Runtime Container (OpenHarness + Web UI)
+  agent:
+    build: .
+    container_name: agent-runtime
+    ports:
+      - "8765:8765"  # Web UI port
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    env_file:
+      - .env
+    volumes:
+      - ./code:/home/ubuntu/code            # Agent code directory
+      - ./.openharness:/home/ubuntu/.openharness  # OpenHarness config
+      - ./web:/home/ubuntu/web              # Web UI files
+    environment:
+      - OPENAI_API_BASE=http://litellm:4000/v1
+      - OPENAI_API_KEY=${LITELLM_MASTER_KEY:-sk-9487}
+      - OPENHARNESS_SETTINGS_DIR=/home/ubuntu/.openharness
+      - OPENCLI_CDP_ENDPOINT=ws://host.docker.internal:9222
+    stdin_open: true
+    tty: true
+    networks:
+      - agent-network
+    depends_on:
+      - litellm
+      - db
+    restart: unless-stopped
+
+networks:
+  agent-network:
+    driver: bridge
+
+volumes:
+  db-data:

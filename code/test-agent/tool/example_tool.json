@@ -1,0 +1,31 @@
+{
+  "name": "example_tool",
+  "description": "An example tool for test-agent",
+  "command": "python3 script/example_tool.py {input}",
+  "working_directory": "~/code/test-agent",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "input": {
+        "type": "string",
+        "description": "Input parameter"
+      }
+    },
+    "required": ["input"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string",
+        "enum": ["success", "error"]
+      },
+      "result": {
+        "type": "string"
+      }
+    }
+  },
+  "timeout": 60,
+  "depends_on": [],
+  "requires": ["python3"]
+}

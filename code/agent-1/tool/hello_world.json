@@ -1,0 +1,36 @@
+{
+  "name": "hello_world",
+  "description": "A simple example tool that echoes a message",
+  "command": "python3 script/hello_world.py {message}",
+  "working_directory": "~/code/agent-1",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "message": {
+        "type": "string",
+        "description": "Message to echo"
+      }
+    },
+    "required": ["message"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string",
+        "enum": ["success", "error"]
+      },
+      "result": {
+        "type": "string",
+        "description": "The echoed message"
+      },
+      "timestamp": {
+        "type": "string",
+        "description": "Execution timestamp"
+      }
+    }
+  },
+  "timeout": 30,
+  "depends_on": [],
+  "requires": ["python3"]
+}
