@@ -2,14 +2,23 @@
 
 這是你的開發工作區，在本機使用 GSD/Claude Code 編輯，在 container 內測試執行。
 
-## 目錄結構建議
+## 目錄結構建議（根據專案需求自行調整）
 
 ```
 workspace/
-├── data/           # 資料集
-├── models/         # 訓練好的模型
-├── notebooks/      # Jupyter notebooks
 ├── src/            # 主要程式碼
+├── tests/          # 測試
+├── scripts/        # 工具腳本
+├── config/         # 配置文件
+└── docs/           # 文檔
+```
+
+或者對於資料處理專案：
+```
+workspace/
+├── data/           # 資料
+├── src/            # 主要程式碼
+├── notebooks/      # Jupyter notebooks
 └── tests/          # 測試
 ```
 

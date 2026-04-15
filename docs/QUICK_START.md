@@ -59,10 +59,9 @@ python3 code/my-first-agent/script/example_tool.py "test input"
 ```
 AgentDevFramework/
 ├── workspace/                 # 🔥 你的開發工作區
-│   ├── data/                 # ← 資料集
-│   ├── models/               # ← 模型
 │   ├── src/                  # ← 主要程式碼
-│   └── tests/                # ← 測試
+│   ├── tests/                # ← 測試
+│   └── ...                   # ← 根據需求自行調整
 │
 ├── code/                      # ← Agent 工具定義
 │   ├── agent-1/              # 範例 agent

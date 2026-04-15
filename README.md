@@ -44,10 +44,9 @@ cd ~/web && python3 server.py
 ```
 AgentDevFramework/
 ├── workspace/             # 🔥 你的開發工作區 (在本機編輯，container 測試)
-│   ├── data/             # 資料集
-│   ├── models/           # 模型
 │   ├── src/              # 主要程式碼
-│   └── tests/            # 測試
+│   ├── tests/            # 測試
+│   └── ...               # 根據專案需求自行調整
 ├── code/                  # Agent 工具定義
 │   └── agent-1/          # 单个 agent
 │       ├── script/       # Python 腳本 (可呼叫 workspace 代碼)
