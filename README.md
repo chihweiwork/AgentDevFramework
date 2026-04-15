@@ -111,7 +111,7 @@ LiteLLM Proxy
 ### **本機編輯 → Container 測試**
 
 1. **在本機開發** (workspace/)
-   - 使用 GSD/Claude Code/IDE 編輯代碼
+   - 使用 GSD/Claude Code/IDE 編輯代碼（使用 `./start-gsd.sh` 啟動 GSD，自動限制在專案內）
    - 修改即時同步到 container
    - 可以正常 git commit/push
 
@@ -135,6 +135,7 @@ LiteLLM Proxy
 - [架構說明](docs/STRUCTURE.md) - 核心檔案與技術細節
 - [內容清单](docs/CONTENTS.md) - 完整內容目錄
 - [開發指南](docs/CLAUDE.md) - Claude Code 工作指南
+- [GSD 使用指南](docs/GSD_USAGE.md) - 在本機使用 GSD 開發（限制在專案內）
 
 ## 🎯 常用命令
 

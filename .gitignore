@@ -10,6 +10,11 @@ container-home/
 # Workspace (uncomment if you don't want to commit workspace files)
 # workspace/
 
+# GSD (Get Shit Done)
+.gsd/session/
+.gsd/logs/
+.gsd/.cache/
+
 # Python
 __pycache__/
 *.py[cod]

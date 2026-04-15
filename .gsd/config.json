@@ -1,0 +1,28 @@
+{
+  "project": {
+    "name": "AgentDevFramework",
+    "root": ".",
+    "restrictions": {
+      "allowedPaths": [
+        "workspace",
+        "code",
+        ".openharness",
+        "web",
+        "docs"
+      ],
+      "blockedPaths": [
+        ".env",
+        ".git"
+      ],
+      "readOnly": false
+    }
+  },
+  "agent": {
+    "model": "claude-sonnet-4",
+    "contextFiles": [
+      "README.md",
+      "workspace/README.md",
+      "docs/CLAUDE.md"
+    ]
+  }
+}
