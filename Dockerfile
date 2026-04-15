@@ -49,7 +49,7 @@ RUN curl -fsSL https://github.com/jackwener/OpenCLI/releases/download/v1.7.2/ope
 
 # ── Stage 2: Python venv builder ───────────────────────────────────────────
 # 用與 final 相同的 base image 建 venv，確保 Python binary 路徑一致
-FROM ai-agent-dev:latest AS python-builder
+FROM ubuntu:24.04 AS python-builder
 
 USER root
 ENV DEBIAN_FRONTEND=noninteractive
@@ -65,7 +65,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 RUN pip install --upgrade pip && pip install openharness-ai graphifyy
 
 # ── Stage 3: final image ────────────────────────────────────────────────────
-FROM ai-agent-dev:latest
+FROM ubuntu:24.04
 
 USER root
 ENV DEBIAN_FRONTEND=noninteractive
