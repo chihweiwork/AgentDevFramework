@@ -43,13 +43,18 @@ cd ~/web && python3 server.py
 
 ```
 AgentDevFramework/
+├── workspace/             # 🔥 你的開發工作區 (在本機編輯，container 測試)
+│   ├── data/             # 資料集
+│   ├── models/           # 模型
+│   ├── src/              # 主要程式碼
+│   └── tests/            # 測試
+├── code/                  # Agent 工具定義
+│   └── agent-1/          # 单个 agent
+│       ├── script/       # Python 腳本 (可呼叫 workspace 代碼)
+│       └── tool/         # 工具定義 (JSON)
 ├── .openharness/          # OpenHarness 設定
 │   ├── agents/           # Agent 定義檔案
 │   └── skills/           # Skills 定義
-├── code/                  # Agent 程式碼目錄
-│   └── agent-1/          # 单个 agent
-│       ├── script/       # Python 腳本
-│       └── tool/         # 工具定義 (JSON)
 ├── web/                   # Web UI
 │   ├── server.py         # WebSocket 服務器
 │   └── index.html        # Web 界面
@@ -83,18 +88,44 @@ code/my-data-agent/
 ## 🔧 架構說明
 
 ```
+Host (本機)                    Container
+──────────────                 ─────────────
+workspace/  ←──────────────→  ~/workspace/    (開發工作區)
+code/       ←──────────────→  ~/code/         (Agent 工具)
+  ↓ 在本機用 GSD/IDE 編輯        ↓ 在 container 測試執行
+
 Browser (Web UI)
-    ↓ WebSocket
+    ↓ WebSocket (port 8765)
 Agent Runtime Container
     ├─ server.py (Starlette)
     ├─ OpenHarness Backend
     └─ Tools (JSON Schema 驅動)
-    ↓ HTTP
+    ↓ HTTP (port 4000)
 LiteLLM Proxy
     ├─ Claude (AWS Bedrock)
     ├─ GPT-4 (OpenAI)
     └─ 本地模型
 ```
+
+## 💻 推薦開發流程
+
+### **本機編輯 → Container 測試**
+
+1. **在本機開發** (workspace/)
+   - 使用 GSD/Claude Code/IDE 編輯代碼
+   - 修改即時同步到 container
+   - 可以正常 git commit/push
+
+2. **在 Container 測試**
+   ```bash
+   docker exec -it agent-runtime bash
+   cd ~/workspace
+   python3 src/your_script.py
+   ```
+
+3. **透過 Agent 整合**
+   - Agent 工具可以呼叫 workspace 的代碼
+   - 在 Web UI 透過自然語言使用工具
 
 ## 📚 檔案
 

@@ -7,6 +7,9 @@ db-data/
 # Container volumes
 container-home/
 
+# Workspace (uncomment if you don't want to commit workspace files)
+# workspace/
+
 # Python
 __pycache__/
 *.py[cod]

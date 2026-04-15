@@ -41,7 +41,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ./code:/home/ubuntu/code            # Agent code directory
+      - ./workspace:/home/ubuntu/workspace  # Your development workspace (edit on host, test in container)
+      - ./code:/home/ubuntu/code            # Agent tool definitions
       - ./.openharness:/home/ubuntu/.openharness  # OpenHarness config
       - ./web:/home/ubuntu/web              # Web UI files
     environment:

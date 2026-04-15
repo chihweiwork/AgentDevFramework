@@ -58,17 +58,23 @@ python3 code/my-first-agent/script/example_tool.py "test input"
 
 ```
 AgentDevFramework/
-├── .openharness/              # OpenHarness 設定
-│   ├── agents/               # ← Agent 說明檔案
-│   └── skills/               # ← Skills 定義
+├── workspace/                 # 🔥 你的開發工作區
+│   ├── data/                 # ← 資料集
+│   ├── models/               # ← 模型
+│   ├── src/                  # ← 主要程式碼
+│   └── tests/                # ← 測試
 │
-├── code/                      # ← 你的 Agent 程式碼在这里
+├── code/                      # ← Agent 工具定義
 │   ├── agent-1/              # 範例 agent
 │   └── my-agent/             # 你的 agent
-│       ├── script/           # Python 腳本
+│       ├── script/           # Python 腳本 (可呼叫 workspace/)
 │       │   └── tool.py
 │       └── tool/             # 工具定義
 │           └── tool.json
+│
+├── .openharness/              # OpenHarness 設定
+│   ├── agents/               # ← Agent 說明檔案
+│   └── skills/               # ← Skills 定義
 │
 ├── web/                       # Web UI (无需修改)
 │   ├── index.html
@@ -80,6 +86,24 @@ AgentDevFramework/
 │
 └── create-agent.sh            # ⭐ 快速建立 agent
 ```
+
+## 💻 開發流程
+
+### **推薦: 本機編輯 + Container 測試**
+
+```
+Host (本機)              Container
+─────────────            ─────────────
+用 GSD/IDE 編輯   ←→    即時同步測試
+workspace/               ~/workspace/
+code/                    ~/code/
+```
+
+**優勢:**
+- ✅ 在本機用熟悉的 IDE 開發
+- ✅ 修改即時同步到 container
+- ✅ Container 提供一致的執行環境
+- ✅ 可正常 git commit/push
 
 ## 工作流程程程
 
