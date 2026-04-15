@@ -41,7 +41,6 @@ services:
     env_file:
       - .env
     volumes:
-      - ./workspace:/home/ubuntu/workspace  # Main development directory (WORKDIR)
       - ./code:/home/ubuntu/code            # Agent code directory
       - ./.openharness:/home/ubuntu/.openharness  # OpenHarness config
       - ./web:/home/ubuntu/web              # Web UI files
